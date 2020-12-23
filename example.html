@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Adaptive Cards Example</title>
+
+	<script src="https://unpkg.com/markdown-it@8.4.0/dist/markdown-it.js"></script>
+	<script src="https://unpkg.com/adaptivecards@latest/dist/adaptivecards.min.js"></script>
+	<script src="https://unpkg.com/adaptive-expressions@rc/lib/browser.js"></script>
+	<script src="https://unpkg.com/adaptivecards-templating@latest/dist/adaptivecards-templating.min.js"></script>
+	
+	
+
+	<style type="text/css">
+		#exampleDiv {
+			width: 250px;
+			border: solid 1px black;
+		}
+	</style>
+
+	<script type="text/javascript">
+		function renderCard() {
+            // Define a template payload
+			var templatePayload = 
+                    {
+                        "type": "TextBlock",
+                        "text": "Hello ${user.deviceplatform}!"
+					};
+            
+            // Create a Template instance from the template payload
+            var template = new ACData.Template(templatePayload);
+
+            // Create a data binding context, and set its $root property to the
+            // data object to bind the template to
+            var context = {
+                $root : {
+					"name": "Adaptive Cards",
+					"user":{
+						"deviceplatform":"helloo"
+					}
+                }
+            };
+
+            // "Expand" the template - this generates the final Adaptive Card,
+            // ready to render
+            var card = template.expand(context);
+console.log("card",card);
+            // Render the card
+			// var adaptiveCard = new AdaptiveCards.AdaptiveCard();
+			// adaptiveCard.parse(card);
+
+			document.getElementById('json').innerHTML=JSON.stringify(card, null, 6)
+     .replace(/\n( *)/g, function (match, p1) {
+         return '<br>' + '&nbsp;'.repeat(p1.length);
+     });
+		}
+	</script>
+
+</head>
+
+<body onload="renderCard()">
+	<h1>Genietalk Cards Data Binding Example</h1>
+	<pre id="json"></pre>
+</html>
