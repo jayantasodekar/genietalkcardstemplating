@@ -7,8 +7,8 @@
 	"homepage": "https://genietalk.ai",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/microsoft/AdaptiveCards.git",
-		"directory": "source/nodejs/adaptivecards-templating"
+		"url": "https://github.com/jayantasodekar/genietalkcardstemplating.git",
+		"directory": "/"
 	},
 	"keywords": [
 		"genietalkcards",
