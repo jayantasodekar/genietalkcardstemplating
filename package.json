@@ -1,6 +1,6 @@
 {
 	"name": "genietalkcards-templating",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Genietalk Card data binding and templating engine for JavaScript",
 	"author": "AdaptiveCards",
 	"license": "MIT",

@@ -18,6 +18,7 @@ class EvaluationContext {
     }
 
     isReservedField(name: string): boolean {
+        console.log("name------------",name);
         return EvaluationContext._reservedFields.indexOf(name) >= 0;
     }
 
@@ -62,7 +63,7 @@ class TemplateObjectMemory implements AEL.MemoryInterface {
 
     getValue(path: string): any {
         let actualPath = (path.length > 0 && path[0] !== "$") ? "$data." + path : path;
-
+console.log("actualPath",actualPath,path);
         return this._memory.getValue(actualPath);
     }
 
@@ -152,12 +153,11 @@ export class Template {
         }
     }
 
-    private static internalTryEvaluateExpression(expression: AEL.Expression, context: EvaluationContext, allowSubstitutions: boolean): { value: any; error: string } {
+    private static internalTryEvaluateExpression(expression: AEL.Expression, context: EvaluationContext, allowSubstitutions: boolean,isme?:Boolean): { value: any; error: string } {
         let memory = new TemplateObjectMemory();
         memory.$root = context.$root;
         memory.$data = context.$data;
         memory.$index = context.$index;
-
         let options: AEL.Options | undefined = undefined;
 
         if (allowSubstitutions) {
@@ -166,10 +166,12 @@ export class Template {
                 let substitutionValue: string | undefined = undefined;
 
                 if (GlobalSettings.getUndefinedFieldValueSubstitutionString) {
-                    substitutionValue = GlobalSettings.getUndefinedFieldValueSubstitutionString(path);    
+                    substitutionValue = GlobalSettings.getUndefinedFieldValueSubstitutionString(path);  
                 }
-        
-                return substitutionValue ? substitutionValue : "${" + path + "}";
+        console.log("path ---",path,isme);
+        let rss=substitutionValue ? substitutionValue : "${" + path + "}"
+        console.log("rss----",rss);
+                return rss;
             }
         }
 
@@ -203,8 +205,9 @@ export class Template {
 
             return { value: result, error: undefined };
         }
-        
-        return expression.tryEvaluate(memory, options);
+        var exxx=expression.tryEvaluate(memory, options);
+        console.log("exxx---------",exxx,memory,options);
+        return exxx;
     }
 
     /**
@@ -283,9 +286,10 @@ export class Template {
         let keys = Object.keys(node);
 
         for (let key of keys) {
+            
             if (!this._context.isReservedField(key)) {
                 let value = this.internalExpand(node[key]);
-
+console.log("value-------------",value);
                 if (value !== undefined) {
                     result[key] = value;
                 }
@@ -319,10 +323,11 @@ export class Template {
             result = itemArray;
         }
         else if (node instanceof AEL.Expression) {
-            let evaluationResult = Template.internalTryEvaluateExpression(node, this._context, true);
-
+            let evaluationResult = Template.internalTryEvaluateExpression(node, this._context, true,true);
+console.log("evaluationResult",evaluationResult);
             if (!evaluationResult.error) {
                 result = evaluationResult.value;
+                console.log("evaluationResult.value",evaluationResult.value);
             }
             else {
                 throw new Error(evaluationResult.error);

@@ -2,64 +2,554 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8" />
-	<title>Adaptive Cards Example</title>
+  <meta charset="utf-8" />
+  <title>Adaptive Cards Example</title>
 
-	<script src="https://unpkg.com/markdown-it@8.4.0/dist/markdown-it.js"></script>
-	<script src="https://unpkg.com/adaptivecards@latest/dist/adaptivecards.min.js"></script>
-	<script src="https://unpkg.com/adaptive-expressions@rc/lib/browser.js"></script>
-	<script src="https://unpkg.com/adaptivecards-templating@latest/dist/adaptivecards-templating.min.js"></script>
-	
-	
+  <script src="https://unpkg.com/markdown-it@8.4.0/dist/markdown-it.js"></script>
+  <script src="https://unpkg.com/adaptivecards@latest/dist/adaptivecards.min.js"></script>
+  <script src="https://unpkg.com/adaptive-expressions@rc/lib/browser.js"></script>
+  <script src="https://unpkg.com/adaptivecards-templating@latest/dist/adaptivecards-templating.min.js"></script>
 
-	<style type="text/css">
-		#exampleDiv {
-			width: 250px;
-			border: solid 1px black;
-		}
-	</style>
 
-	<script type="text/javascript">
-		function renderCard() {
-            // Define a template payload
-			var templatePayload = 
+
+  <style type="text/css">
+    #exampleDiv {
+      width: 250px;
+      border: solid 1px black;
+    }
+  </style>
+
+  <script type="text/javascript">
+    function renderCard() {
+      // Define a template payload
+      // var templatePayload =
+      // {
+      //   "type": "GenietalkCard",
+      //   "version": "1.3",
+      //   "body": [
+      //     {
+      //       "type": "Carousel",
+      //       "displayitemcount": 2,
+
+      //       "carouselitems": [
+      //         {
+      //           "$data": "${list}",
+      //           "type": "CarouselItem",
+      //           "width": "auto",
+      //           "items": [
+      //             {
+      //               "type": "Container",
+      //               "PlanAmount": 449,
+      //               "PlanCategory": "truely unlimited",
+      //               "PlanCurrency": "rupees",
+      //               "PlanDurationInDays": 56,
+      //               "items": [
+      //                 {
+      //                   "type": "ColumnSet",
+      //                   "columns": [
+      //                     {
+      //                       "type": "Column",
+      //                       "items": [
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "${planname}",
+      //                           "isSubtle": true
+      //                         },
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "${price}",
+      //                           "spacing": "Small",
+      //                           "weight": "Bolder"
+      //                         }
+      //                       ],
+      //                       "separator": true,
+      //                       "backgroundImage": {},
+      //                       "width": 2
+      //                     },
+      //                     {
+      //                       "type": "Column",
+      //                       "width": 1,
+      //                       "items": [
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "Benifits",
+      //                           "isSubtle": true,
+      //                           "horizontalAlignment": "Center"
+      //                         },
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "2GB/day",
+      //                           "weight": "Bolder",
+      //                           "horizontalAlignment": "Center",
+      //                           "spacing": "Small"
+      //                         }
+      //                       ]
+      //                     },
+      //                     {
+      //                       "type": "Column",
+      //                       "width": 1,
+      //                       "items": [
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "Validity",
+      //                           "isSubtle": true,
+      //                           "horizontalAlignment": "Right"
+      //                         },
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "56 days",
+      //                           "horizontalAlignment": "Right",
+      //                           "weight": "Bolder",
+      //                           "spacing": "Small"
+      //                         }
+      //                       ]
+      //                     }
+      //                   ],
+      //                   "selectAction": {
+      //                     "type": "Action.Submit",
+      //                     "data": {
+      //                       "action": "query",
+      //                       "actiondata": "I am looking to buy rupees 449 plan"
+      //                     }
+      //                   }
+      //                 },
+      //                 {
+      //                   "type": "ColumnSet",
+      //                   "columns": [
+      //                     {
+      //                       "type": "Column",
+      //                       "selectAction": {
+      //                         "type": "Action.ToggleVisibility",
+      //                         "targetElements": [
+      //                           "cardContent1",
+      //                           "showHistory1",
+      //                           "hideHistory1"
+      //                         ]
+      //                       },
+      //                       "verticalContentAlignment": "Center",
+      //                       "items": [
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "id": "showHistory1",
+      //                           "horizontalAlignment": "Right",
+      //                           "color": "Attention",
+      //                           "text": "Show more",
+      //                           "wrap": true
+      //                         },
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "id": "hideHistory1",
+      //                           "horizontalAlignment": "Right",
+      //                           "color": "Attention",
+      //                           "text": "Show less",
+      //                           "wrap": true,
+      //                           "isVisible": false
+      //                         }
+      //                       ],
+      //                       "width": 1
+      //                     }
+      //                   ]
+      //                 },
+      //                 {
+      //                   "type": "Container",
+      //                   "id": "cardContent1",
+      //                   "isVisible": false,
+      //                   "items": [
+      //                     {
+      //                       "type": "Container",
+      //                       "items": [
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "Airtel Benifit(s) - Xstream Premium - Free Hellotunes",
+      //                           "wrap": true,
+      //                           "isSubtle": true
+      //                         },
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "- **Airtel Xstream Premium**  \nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows",
+      //                           "isSubtle": true,
+      //                           "wrap": true
+      //                         },
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "- **Free Hellotunes**  \nSet any song as Hello Tune with Unlimited changes",
+      //                           "isSubtle": true,
+      //                           "wrap": true
+      //                         },
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "- **Wynk Music**  \nEnjoy unlimited music downloads for free",
+      //                           "isSubtle": true,
+      //                           "wrap": true
+      //                         },
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "- **Free online courses **  \nValidity 1 YEAR Upskill with Shaw Academy",
+      //                           "isSubtle": true,
+      //                           "wrap": true
+      //                         },
+      //                         {
+      //                           "type": "TextBlock",
+      //                           "text": "- **Get Rs 150 cashback on FASTag **  \nContactless delivery of FASTag",
+      //                           "isSubtle": true,
+      //                           "wrap": true
+      //                         }
+      //                       ]
+      //                     }
+      //                   ]
+      //                 }
+      //               ]
+      //             }
+      //           ]
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // };
+
+
+      // var templatePayload = {
+      //   $data: "${payload.list}",
+      //   text: "${name}* *₹${amount}* ${otherdetails} Validity:${validity} Talktime:${talktime} Benefites:${benefit}"
+      // };//"hello this is ${payload.list.planname} amount is ${enitity.amount}\n";
+      // Create a Template instance from the template payload
+      var templatePayload = 
+      {
+  "type": "GenietalkCard",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "Carousel",
+      "displayitemcount": 2,
+      "carouselitems": [
+        {
+          "$data": "${payload}",
+          "type": "CarouselItem",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Container",
+              "PlanAmount": 449,
+              "PlanCategory": "truely unlimited",
+              "PlanCurrency": "rupees",
+              "PlanDurationInDays": 56,
+              "items": [
+                {
+                  "type": "ColumnSet",
+                  "columns": [
                     {
-                        "type": "TextBlock",
-                        "text": "Hello ${user.deviceplatform}!"
-					};
-            
-            // Create a Template instance from the template payload
-            var template = new ACData.Template(templatePayload);
-
-            // Create a data binding context, and set its $root property to the
-            // data object to bind the template to
-            var context = {
-                $root : {
-					"name": "Adaptive Cards",
-					"user":{
-						"deviceplatform":"helloo"
-					}
+                      "type": "Column",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "Truely Unlimited",
+                          "isSubtle": true
+                        },
+                        {
+                          "type": "TextBlock",
+                          "text": "Rs 499",
+                          "spacing": "Small",
+                          "weight": "Bolder"
+                        }
+                      ],
+                      "separator": true,
+                      "backgroundImage": {},
+                      "width": 2
+                    },
+                    {
+                      "type": "Column",
+                      "width": 1,
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "Benifits",
+                          "isSubtle": true,
+                          "horizontalAlignment": "Center"
+                        },
+                        {
+                          "type": "TextBlock",
+                          "text": "2GB/day",
+                          "weight": "Bolder",
+                          "horizontalAlignment": "Center",
+                          "spacing": "Small"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Column",
+                      "width": 1,
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "Validity",
+                          "isSubtle": true,
+                          "horizontalAlignment": "Right"
+                        },
+                        {
+                          "type": "TextBlock",
+                          "text": "56 days",
+                          "horizontalAlignment": "Right",
+                          "weight": "Bolder",
+                          "spacing": "Small"
+                        }
+                      ]
+                    }
+                  ],
+                  "selectAction": {
+                    "type": "Action.Submit",
+                    "data": {
+                      "action": "query",
+                      "actiondata": "I am looking to buy rupees 449 plan"
+                    }
+                  }
+                },
+                {
+                  "type": "ColumnSet",
+                  "columns": [
+                    {
+                      "type": "Column",
+                      "selectAction": {
+                        "type": "Action.ToggleVisibility",
+                        "targetElements": [
+                          "cardContent_${id}",
+                          "showHistory_${id}",
+                          "hideHistory_${id}"
+                        ]
+                      },
+                      "verticalContentAlignment": "Center",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "id": "showHistory_${id}",
+                          "horizontalAlignment": "Right",
+                          "color": "Attention",
+                          "text": "Show more",
+                          "wrap": true
+                        },
+                        {
+                          "type": "TextBlock",
+                          "id": "hideHistory_${id}",
+                          "horizontalAlignment": "Right",
+                          "color": "Attention",
+                          "text": "Show less",
+                          "wrap": true,
+                          "isVisible": false
+                        }
+                      ],
+                      "width": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "Container",
+                  "id": "cardContent_${id}",
+                  "isVisible": false,
+                  "items": [
+                    {
+                      "type": "Container",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "Airtel Benifit(s) - Xstream Premium - Free Hellotunes",
+                          "wrap": true,
+                          "isSubtle": true
+                        },
+                        {
+                          "type": "TextBlock",
+                          "text": "- **Airtel Xstream Premium**  \nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows",
+                          "isSubtle": true,
+                          "wrap": true
+                        },
+                        {
+                          "type": "TextBlock",
+                          "text": "- **Free Hellotunes**  \nSet any song as Hello Tune with Unlimited changes",
+                          "isSubtle": true,
+                          "wrap": true
+                        },
+                        {
+                          "type": "TextBlock",
+                          "text": "- **Wynk Music**  \nEnjoy unlimited music downloads for free",
+                          "isSubtle": true,
+                          "wrap": true
+                        },
+                        {
+                          "type": "TextBlock",
+                          "text": "- **Free online courses **  \nValidity 1 YEAR Upskill with Shaw Academy",
+                          "isSubtle": true,
+                          "wrap": true
+                        },
+                        {
+                          "type": "TextBlock",
+                          "text": "- **Get Rs 150 cashback on FASTag **  \nContactless delivery of FASTag",
+                          "isSubtle": true,
+                          "wrap": true
+                        }
+                      ]
+                    }
+                  ]
                 }
-            };
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+      
+      // {
+      //   $data: "${payload}",
+      //   title: "${name} ${amount}",
+      //   image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx7wjwZWVmqJQZkmuqEyvTubjhvb2ha5jnNA&usqp=CAU',
+      //   subtitle: 'We have the right hat for everyone.',
+      //   default_action: {
+      //     type: 'web_url',
+      //     url: 'https://petersfancybrownhats.com/view?item=103',
+      //     webview_height_ratio: 'tall'
+      //   },
+      //   buttons: [
+      //     {
+      //       type: 'web_url',
+      //       url: 'https://petersfancybrownhats.com',
+      //       title: 'View Website'
+      //     },
+      //     {
+      //       type: 'postback',
+      //       payload: 'DEVELOPER_DEFINED_PAYLOAD',
+      //       title: 'Start Chatting'
+      //     }
+      //   ]
+      // };
+      var template = new ACData.Template(templatePayload);
 
-            // "Expand" the template - this generates the final Adaptive Card,
-            // ready to render
-            var card = template.expand(context);
-console.log("card",card);
-            // Render the card
-			// var adaptiveCard = new AdaptiveCards.AdaptiveCard();
-			// adaptiveCard.parse(card);
+      // Create a data binding context, and set its $root property to the
+      // data object to bind the template to
+      var context = {
+        $root: {
+          "user": {
+            "deviceplatform": "helloo"
+          },
+          "payload": [
+    {
+      "benefits": [
+        "*Airtel Xstream Premium\nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows",
+        "*Free Hellotunes\nSet any song as Hellotune with Unlimited changes",
+        "*Wynk Music\nEnjoy unlimited music downloads for free",
+        "*Free online courses!\nValidity: 1 YEAR\nUpskill with Shaw Academy",
+        "*Get Rs. 150 cashback on FASTag\nContactless delivery of FASTag"
+      ],
+      "name": "Truly Unlimited",
+      "amount": "598",
+      "talktime": "Unlimited",
+      "isaddon": "false",
+      "otherdetails": "SMS_TARIFF: Post daily 100 SMS limit charging will be Re1 Local | Rs.1.5 STD per SMS DATA_SPEED: Post daily quota usage data speed will be upto 64Kbps",
+      "details": "",
+      "validity": "84 days",
+      "state": "all",
+      "benefits_string": "*Airtel Xstream Premium\nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows\n\n*Free Hellotunes\nSet any song as Hellotune with Unlimited changes\n\n*Wynk Music\nEnjoy unlimited music downloads for free\n\n*Free online courses!\nValidity: 1 YEAR\nUpskill with Shaw Academy\n\n*Get Rs. 150 cashback on FASTag\nContactless delivery of FASTag",
+      "id": "5fc9e450f8f3d91da10de357"
+    },
+    {
+      "benefits": [
+        "*Airtel Xstream Premium\nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows",
+        "*Free Hellotunes\nSet any song as Hellotune with Unlimited changes",
+        "*Wynk Music\nEnjoy unlimited music downloads for free",
+        "*Free online courses!\nValidity: 1 YEAR\nUpskill with Shaw Academy",
+        "*Get Rs. 150 cashback on FASTag\nContactless delivery of FASTag"
+      ],
+      "name": "Truly Unlimited",
+      "amount": "399",
+      "talktime": "Unlimited",
+      "isaddon": "false",
+      "otherdetails": "SMS_TARIFF: Post daily 100 SMS limit charging will be Re1 Local | Rs.1.5 STD per SMS DATA_SPEED: Post daily quota usage data speed will be upto 64Kbps",
+      "details": "",
+      "validity": "56 days",
+      "state": "all",
+      "benefits_string": "*Airtel Xstream Premium\nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows\n\n*Free Hellotunes\nSet any song as Hellotune with Unlimited changes\n\n*Wynk Music\nEnjoy unlimited music downloads for free\n\n*Free online courses!\nValidity: 1 YEAR\nUpskill with Shaw Academy\n\n*Get Rs. 150 cashback on FASTag\nContactless delivery of FASTag",
+      "id": "5fc9e450f8f3d91da10de358"
+    },
+    {
+      "benefits": [
+        "*Airtel Xstream Premium\nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows",
+        "*Free Hellotunes\nSet any song as Hellotune with Unlimited changes",
+        "*Wynk Music\nEnjoy unlimited music downloads for free",
+        "*Free online courses!\nValidity: 1 YEAR\nUpskill with Shaw Academy",
+        "*Get Rs. 150 cashback on FASTag\nContactless delivery of FASTag"
+      ],
+      "name": "Truly Unlimited",
+      "amount": "249",
+      "talktime": "Unlimited",
+      "isaddon": "false",
+      "otherdetails": "SMS_TARIFF: Post daily 100 SMS limit charging will be Re1 Local | Rs.1.5 STD per SMS DATA_SPEED: Post daily quota usage data speed will be upto 64Kbps",
+      "details": "",
+      "validity": "28 days",
+      "state": "all",
+      "benefits_string": "*Airtel Xstream Premium\nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows\n\n*Free Hellotunes\nSet any song as Hellotune with Unlimited changes\n\n*Wynk Music\nEnjoy unlimited music downloads for free\n\n*Free online courses!\nValidity: 1 YEAR\nUpskill with Shaw Academy\n\n*Get Rs. 150 cashback on FASTag\nContactless delivery of FASTag",
+      "id": "5fc9e450f8f3d91da10de359"
+    },
+    {
+      "benefits": [
+        "*Airtel Xstream Premium\nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows",
+        "*Free Hellotunes\nSet any song as Hellotune with Unlimited changes",
+        "*Wynk Music\nEnjoy unlimited music downloads for free"
+      ],
+      "name": "Truly Unlimited",
+      "amount": "219",
+      "talktime": "Unlimited",
+      "isaddon": "false",
+      "otherdetails": "SMS_TARIFF: Post daily 100 SMS limit charging will be Re1 Local | Rs.1.5 STD per SMS DATA_SPEED: Post daily quota usage data speed will be upto 64Kbps",
+      "details": "",
+      "validity": "28 days",
+      "state": "all",
+      "benefits_string": "*Airtel Xstream Premium\nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows\n\n*Free Hellotunes\nSet any song as Hellotune with Unlimited changes\n\n*Wynk Music\nEnjoy unlimited music downloads for free",
+      "id": "5fc9e450f8f3d91da10de35a"
+    },
+    {
+      "benefits": [
+        "*Airtel Xstream Premium\nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows",
+        "*Free Hellotunes\nSet any song as Hellotune with Unlimited changes",
+        "*Wynk Music\nEnjoy unlimited music downloads for free",
+        "*Free online courses!\nValidity: 1 YEAR\nUpskill with Shaw Academy",
+        "*Get Rs. 150 cashback on FASTag\nContactless delivery of FASTag"
+      ],
+      "name": "Truly Unlimited",
+      "amount": "698",
+      "talktime": "Unlimited",
+      "isaddon": "false",
+      "otherdetails": "SMS_TARIFF: Post daily 100 SMS limit charging will be Re1 Local | Rs.1.5 STD per SMS DATA_SPEED: Post daily quota usage data speed will be upto 64Kbps",
+      "details": "",
+      "validity": "84 days",
+      "state": "all",
+      "benefits_string": "*Airtel Xstream Premium\nFREE 400+ Live TV Channels, Unlimited Movies and TV Shows\n\n*Free Hellotunes\nSet any song as Hellotune with Unlimited changes\n\n*Wynk Music\nEnjoy unlimited music downloads for free\n\n*Free online courses!\nValidity: 1 YEAR\nUpskill with Shaw Academy\n\n*Get Rs. 150 cashback on FASTag\nContactless delivery of FASTag",
+      "id": "5fc9e450f8f3d91da10de35b"
+    }
+  ],
+  "condition": {
+    "number_of_plans": 10
+  }
 
-			document.getElementById('json').innerHTML=JSON.stringify(card, null, 6)
-     .replace(/\n( *)/g, function (match, p1) {
-         return '<br>' + '&nbsp;'.repeat(p1.length);
-     });
-		}
-	</script>
+        }
+      };
+
+      // "Expand" the template - this generates the final Adaptive Card,
+      // ready to render
+      var card = template.expand(context);
+      console.log("card", card);
+      // Render the card
+      // var adaptiveCard = new AdaptiveCards.AdaptiveCard();
+      // adaptiveCard.parse(card);
+
+      document.getElementById('json').innerHTML = JSON.stringify(card, null, 6)
+        .replace(/\n( *)/g, function (match, p1) {
+          return '<br>' + '&nbsp;'.repeat(p1.length);
+        });
+    }
+  </script>
 
 </head>
 
 <body onload="renderCard()">
-	<h1>Genietalk Cards Data Binding Example</h1>
-	<pre id="json"></pre>
+  <h1>Genietalk Cards Data Binding Example</h1>
+  <pre id="json"></pre>
+
 </html>
